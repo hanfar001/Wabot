@@ -1,0 +1,53 @@
+name: Typescript Types
+on:
+  pull_request:
+    paths:
+      - '.github/workflows/tsd.yml'
+      - 'package.json'
+      - 'types/**'
+      - 'test/types/**'
+  push:
+    branches:
+      - master
+    paths:
+      - '.github/workflows/tsd.yml'
+      - 'package.json'
+      - 'types/**'
+      - 'test/types/**'
+permissions:
+  contents: read
+
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+    name: Lint TS-Files
+    steps:
+      - uses: actions/checkout@ac593985615ec2ede58e132d2e21d2b1cbd6127c # v3.3.0
+
+      - name: Setup node
+        uses: actions/setup-node@64ed1c7eab4cce3362f8c340dee64e5eaeef8f7c # v3.6.0
+        with:
+          node-version: 14
+
+      - run: npm install
+
+      - name: Lint TS-Files
+        run: npm run lint-ts
+
+  test-ts-types:
+    needs:
+      - lint
+    runs-on: ubuntu-latest
+    name: Test Typescript Types
+    steps:
+      - uses: actions/checkout@ac593985615ec2ede58e132d2e21d2b1cbd6127c # v3.3.0
+
+      - name: Setup node
+        uses: actions/setup-node@64ed1c7eab4cce3362f8c340dee64e5eaeef8f7c # v3.6.0
+        with:
+          node-version: 12
+
+      - run: npm install
+
+      - name: Typings
+        run: npm run test-tsd

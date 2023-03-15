@@ -1,0 +1,34 @@
+import fetch from 'node-fetch'
+let handler = async (m, { conn, command }) => {
+	let url = 'https://i.postimg.cc/VLbNgTN0/preview-148621-1582468167.jpg'
+let wm = 'Hai Saya BOT KYURAZZ Jangan Lupa Follow Instagram Owner kami\n\nAtau bisa klik link IG : https://www.instagram.com/farhan_aan_01'
+let cap = `*ANONYMOUS CHAT*
+
+Ini adalah fitur dimana kalian dapat menemukan teman secara acak/random. Gunakan bot dengan bijak dan jangan merugikan orang lain
+
+Berikut contoh perintah nya:
+/start
+/next
+/leave
+/sendkontak
+
+Penggunaan :
+/start, berfungsi dimana kalian memulai mencari teman atau baru pertama kali dalam menggubakan bot ini, kalian juga bisa mengulangi perintah jika bot tidak merespon dengan syarat jangan spam.
+
+/next, berfungsi untuk melewati chat pada lawan bicara kalian di bot ini
+
+/leave, berfungsi untuk mengakhiri pada sesi chat bot kepada lawan bicara anda atau menghentikan menggunakan fitur ini, kalian bisa gunakan kembali dengan mengetik perintah /start untuk memulai kembali mencari lawan chat.
+
+/sendkontak, berfungsi untuk mengirim no kontak wa kalian kepada lawan bicara anda, dan hati hati dalam menggunakan fitur ini karena owner dan bot tidak bertanggungjawab jawab atas penyalahgunaan fitur ini untuk hal yang tidak di ingin kan.
+
+Itu aja sedikit informasi yang kami sampaikan gunakan bot dengan bijak ya teman teman.
+
+NB : gunakan tanda / agar bot merespon pesan kalian dalama menggunakan fitur ini`
+	conn.sendButton(m.chat, cap, wm, await(await fetch(url)).buffer(), [['START',`.start`]],m)
+}
+
+handler.command = /^(test)$/i
+handler.premium = false
+handler.limit = true
+
+export default handler
